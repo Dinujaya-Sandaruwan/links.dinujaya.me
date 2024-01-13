@@ -11,9 +11,9 @@ function App() {
           <button>Short Now</button>
         </div>
         <p className="info-text">
-          short.dinujaya.com, crafted by Dinujaya, serves as a complimentary
-          utility designed for URL abbreviation and the generation of succinct
-          links.
+          short.dinujaya.com is a professionally crafted, free tool for URL
+          shortening and generating concise links, streamlining the process of
+          effortless content sharing.
         </p>
       </section>
     </main>
