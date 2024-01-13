@@ -1,1 +1,92 @@
+main {
+  padding: 0px 10px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .main-title {
+    text-align: center;
+    margin-top: 1.875rem;
+    margin-top: clamp(
+      1.875rem,
+      1.3408119658119657rem + 1.7094017094017095vw,
+      3.125rem
+    );
+    color: var(--primary-blue);
 
+    font-size: 1.5625rem;
+    font-size: clamp(
+      1.5625rem,
+      0.6276709401709402rem + 2.9914529914529915vw,
+      3.75rem
+    );
+    text-shadow: 1px 1px 0px var(--black);
+  }
+
+  .short-url-area {
+    width: clamp(300px, 70%, 700px);
+    height: auto;
+    box-shadow: 0px 0px 5px rgba($color: #000000, $alpha: 0.3);
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .paste-here-title {
+      text-align: center;
+      color: var(--dark-gray);
+      font-size: 1.0625rem;
+      font-size: clamp(
+        1.0625rem,
+        0.7954059829059829rem + 0.8547008547008548vw,
+        1.6875rem
+      );
+    }
+
+    .input-area {
+      margin-top: 20px;
+      // outline: 1px solid red;
+      width: 100%;
+      input {
+        padding: 10px;
+        width: 70%;
+        height: 40px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border: 1px solid var(--primary-blue);
+        color: var(--dark-gray);
+      }
+      input:focus {
+        outline: none;
+        border: 1px solid var(--primary-blue);
+      }
+      button {
+        width: 30%;
+        height: 40px;
+        outline: none;
+        border: 1px solid var(--primary-blue);
+        background-color: var(--primary-blue);
+        color: var(--white);
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+
+    .info-text {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--light-gray);
+      line-height: 1.5;
+      font-size: 0.5625rem;
+      font-size: clamp(
+        0.5625rem,
+        0.4791666666666667rem + 0.4166666666666667vw,
+        0.8125rem
+      );
+    }
+  }
+}
