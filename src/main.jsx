@@ -10,7 +10,7 @@ const queryClient = new QueryClient({
       retry: 3, // Number of retries on failure
       cacheTime: 300_000, // Cache data for 5 minutes
       staleTime: 0, // Data is considered stale immediately (0ms)
-      refetchOnWindowFocus: false, // Automatically refetch on window focus
+      refetchOnWindowFocus: true, // Automatically refetch on window focus
       refetchOnMount: true, // Don't refetch when the component mounts
       refetchOnReconnect: true, // Automatically refetch on reconnection
     },

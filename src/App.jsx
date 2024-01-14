@@ -1,19 +1,34 @@
 import React from "react";
 import { useState } from "react";
+import { useRef } from "react";
+
 import useLimitText from "./hooks/useLimitText";
 import "./scss/index.scss";
 import useGetUrls from "./hooks/useGetUrls";
 
 import Copy from "./components/Copy";
+import usePostUrl from "./hooks/usePostUrl";
 
 function App() {
   const { data: urls, isLoading, error } = useGetUrls();
+  const ref = useRef(null);
+
+  const addData = usePostUrl();
+
+  const handleSubmit = () => {
+    if (ref.current && ref.current.value) {
+      addData.mutate({
+        user: "2bd46515-cd09-4b18-8673-254efd5d7d07",
+        fullUrl: ref.current.value,
+      });
+    }
+
+    ref.current.value = "";
+  };
 
   if (isLoading) return <p>Loading...</p>;
 
   if (error) return <p>{error.message}</p>;
-
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <main>
@@ -21,8 +36,8 @@ function App() {
       <section className="short-url-area">
         <h2 className="paste-here-title">Paste the URL to be shortened</h2>
         <div className="input-area">
-          <input type="text" className="url-input" />
-          <button>Short Now</button>
+          <input ref={ref} type="text" className="url-input" />
+          <button onClick={handleSubmit}>Short Now</button>
         </div>
         <p className="info-text">
           short.dinujaya.com is a professionally crafted, free tool for URL
@@ -37,7 +52,7 @@ function App() {
           <span>Copy now</span>
         </div>
         <div className="body">
-          {urls.shortUrls.map((item, index) => (
+          {[...urls.shortUrls].reverse().map((item, index) => (
             <React.Fragment key={index}>
               <hr className="seperator" />
               <div className="one-short-url" key={index}>
