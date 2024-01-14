@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import useLimitText from "./hooks/useLimitText";
 import "./scss/index.scss";
@@ -10,7 +11,16 @@ import Copy from "./components/Copy";
 import usePostUrl from "./hooks/usePostUrl";
 
 function App() {
-  const { data: urls, isLoading, error } = useGetUrls();
+  if (!localStorage.getItem("userId")) {
+    localStorage.setItem("userId", uuidv4());
+  }
+
+  const {
+    data: urls,
+    isLoading,
+    error,
+  } = useGetUrls(localStorage.getItem("userId"));
+
   const ref = useRef(null);
 
   const addData = usePostUrl();
@@ -18,7 +28,7 @@ function App() {
   const handleSubmit = () => {
     if (ref.current && ref.current.value) {
       addData.mutate({
-        user: "2bd46515-cd09-4b18-8673-254efd5d7d07",
+        user: localStorage.getItem("userId"),
         fullUrl: ref.current.value,
       });
     }
@@ -55,7 +65,7 @@ function App() {
           {[...urls.shortUrls].reverse().map((item, index) => (
             <React.Fragment key={index}>
               <hr className="seperator" />
-              <div className="one-short-url" key={index}>
+              <div className="one-short-url">
                 <a href="#" className="url">
                   {useLimitText(item.full)}
                 </a>

@@ -16,7 +16,7 @@ const usePostUrl = () => {
       queryClient.invalidateQueries({
         queryKey: ["urls"],
       });
-      console.log(savedData, newData);
+      //   console.log(savedData, newData);
     },
   });
 };

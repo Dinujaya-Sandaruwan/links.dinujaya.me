@@ -50,7 +50,7 @@ app.get("/user/:userId", async (req, res) => {
 // POST create a short URL
 app.post("/shortUrls", async (req, res) => {
   try {
-    const userId = req.body.data.user || uuidv4();
+    const userId = req.body.data.user;
     await ShortUrl.create({ user: userId, full: req.body.data.fullUrl });
     const shortUrls = await ShortUrl.find({ user: userId });
     res.json({ shortUrls });
