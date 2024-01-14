@@ -2,23 +2,18 @@ import React from "react";
 import { useState } from "react";
 import useLimitText from "./hooks/useLimitText";
 import "./scss/index.scss";
-import { FaCopy } from "react-icons/fa6";
-import { MdDone } from "react-icons/md";
+import useGetUrls from "./hooks/useGetUrls";
+
+import Copy from "./components/Copy";
 
 function App() {
-  const [copy, setCopy] = useState(false);
-  const copyText = () => {
-    setCopy(true);
-    setTimeout(() => {
-      setCopy(false);
-    }, 1000);
-  };
+  const { data: urls, isLoading, error } = useGetUrls();
 
-  const arr = [];
+  if (isLoading) return <p>Loading...</p>;
 
-  for (let index = 0; index < 50; index++) {
-    arr.push(index);
-  }
+  if (error) return <p>{error.message}</p>;
+
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <main>
@@ -42,17 +37,15 @@ function App() {
           <span>Copy now</span>
         </div>
         <div className="body">
-          {arr.map((item, index) => (
+          {urls.shortUrls.map((item, index) => (
             <React.Fragment key={index}>
               <hr className="seperator" />
               <div className="one-short-url" key={index}>
                 <a href="#" className="url">
-                  {useLimitText("short.dinujaya.com/desgc2u")}
+                  {useLimitText(item.full)}
                 </a>
-                <span className="clicks">23</span>
-                <span className="copy" onClick={copyText}>
-                  {copy ? <MdDone /> : <FaCopy />}
-                </span>
+                <span className="clicks">{item.clicks}</span>
+                <Copy shortUrl={item.short} />
               </div>
             </React.Fragment>
           ))}

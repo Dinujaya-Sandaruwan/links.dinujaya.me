@@ -4,6 +4,20 @@ const ShortUrl = require("./models/shortUrl");
 const app = express();
 const uuidv4 = require("uuid").v4;
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 mongoose.connect("mongodb://127.0.0.1:27017/urlShortener", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -53,7 +67,8 @@ app.get("/:shortUrl", async (req, res) => {
 
     shortUrl.clicks++;
     shortUrl.save();
-    res.json({ fullUrl: shortUrl.full });
+    // res.json({ fullUrl: shortUrl.full });
+    res.redirect(shortUrl.full);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
