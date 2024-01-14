@@ -1,0 +1,34 @@
+{
+  "name": "short.dinujaya.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dinujaya-Sandaruwan/short.dinujaya.com.git"
+  },
+  "keywords": [
+    "short.dinujaya.com",
+    "short",
+    "url"
+  ],
+  "author": "Dinujaya Sandaruwan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dinujaya-Sandaruwan/short.dinujaya.com/issues"
+  },
+  "homepage": "https://github.com/Dinujaya-Sandaruwan/short.dinujaya.com#readme",
+  "dependencies": {
+    "express": "v4.17.1",
+    "mongoose": "v5.9.1",
+    "shortid": "v2.2.15",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
