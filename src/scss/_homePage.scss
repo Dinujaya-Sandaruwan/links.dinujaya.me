@@ -22,7 +22,7 @@ main {
     text-shadow: 1px 1px 0px var(--black);
   }
 
-  .short-url-area {
+  .area-styles {
     width: clamp(300px, 70%, 700px);
     height: auto;
     box-shadow: 0px 0px 5px rgba($color: #000000, $alpha: 0.3);
@@ -30,6 +30,10 @@ main {
     border-radius: 10px;
     padding: 25px;
     margin-top: 30px;
+  }
+
+  .short-url-area {
+    @extend .area-styles;
 
     display: flex;
     justify-content: center;
@@ -73,6 +77,13 @@ main {
         color: var(--white);
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
+        cursor: pointer;
+        font-size: 0.71875rem;
+        font-size: clamp(
+          0.71875rem,
+          0.6458333333333334rem + 0.3645833333333333vw,
+          0.9375rem
+        );
       }
     }
 
@@ -87,6 +98,92 @@ main {
         0.4791666666666667rem + 0.4166666666666667vw,
         0.8125rem
       );
+    }
+  }
+
+  .short-urls-display-area {
+    @extend .area-styles;
+    margin-bottom: 60px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      span {
+        font-weight: $regular;
+        font-size: 0.8125rem;
+        color: var(--dark-gray);
+
+        font-size: clamp(
+          0.8125rem,
+          0.7708333333333334rem + 0.20833333333333334vw,
+          0.9375rem
+        );
+      }
+
+      & > :nth-child(1) {
+        width: 54%;
+      }
+      & > :nth-child(2) {
+        width: 23%;
+      }
+      & > :nth-child(3) {
+        width: 23%;
+        text-align: right;
+      }
+    }
+
+    .body {
+      margin-top: 20px;
+      width: 100%;
+      max-height: 400px;
+      overflow-y: scroll;
+
+      .seperator {
+        margin: 10px 0px 10px 0px;
+        height: 1px;
+        opacity: 0.3;
+      }
+
+      .one-short-url {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        font-size: 0.625rem;
+        font-size: clamp(
+          0.625rem,
+          0.5208333333333334rem + 0.5208333333333333vw,
+          0.9375rem
+        );
+
+        & > :nth-child(1) {
+          width: 54%;
+        }
+        & > :nth-child(2) {
+          width: 23%;
+          padding-left: 10px;
+        }
+        & > :nth-child(3) {
+          width: 23%;
+          text-align: right;
+        }
+        .url {
+          color: rgb(79, 79, 255);
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        .url:hover {
+          color: rgb(0, 0, 255);
+          text-decoration: underline;
+        }
+
+        .copy {
+          cursor: pointer;
+          color: var(--primary-blue);
+          font-size: 22px;
+        }
+      }
     }
   }
 }
