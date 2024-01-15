@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
+import PuffLoader from "react-spinners/PuffLoader";
+import { FaGithub } from "react-icons/fa";
 
 import useLimitText from "./hooks/useLimitText";
 import "./scss/index.scss";
@@ -36,8 +38,6 @@ function App() {
     ref.current.value = "";
   };
 
-  if (isLoading) return <p>Loading...</p>;
-
   if (error) return <p>{error.message}</p>;
 
   return (
@@ -55,27 +55,41 @@ function App() {
           effortless content sharing.
         </p>
       </section>
-      <section className="short-urls-display-area">
-        <div className="header">
-          <span>Short URL</span>
-          <span>Clicks</span>
-          <span>Copy now</span>
-        </div>
-        <div className="body">
-          {[...urls.shortUrls].reverse().map((item, index) => (
-            <React.Fragment key={index}>
-              <hr className="seperator" />
-              <div className="one-short-url">
-                <a href="#" className="url">
-                  {useLimitText(item.full)}
-                </a>
-                <span className="clicks">{item.clicks}</span>
-                <Copy shortUrl={item.short} />
-              </div>
-            </React.Fragment>
-          ))}
-        </div>
-      </section>
+
+      {urls?.shortUrls.length != 0 && (
+        <section className="short-urls-display-area">
+          <div className="header">
+            <span>Short URL</span>
+            <span>Clicks</span>
+            <span>Copy now</span>
+          </div>
+
+          <div className="body">
+            {isLoading && (
+              <PuffLoader
+                color="#00ad88"
+                loading
+                size={80}
+                cssOverride={{ margin: "auto", marginBlockStart: "2rem" }}
+              />
+            )}
+
+            {urls?.shortUrls &&
+              [...urls?.shortUrls].reverse().map((item, index) => (
+                <React.Fragment key={index}>
+                  <hr className="seperator" />
+                  <div className="one-short-url">
+                    <a href={item.full} target="_blank" className="url">
+                      {useLimitText(item.full)}
+                    </a>
+                    <span className="clicks">{item.clicks}</span>
+                    <Copy shortUrl={item.short} />
+                  </div>
+                </React.Fragment>
+              ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
