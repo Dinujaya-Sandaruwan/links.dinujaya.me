@@ -90,6 +90,15 @@ function App() {
           </div>
         </section>
       )}
+      <footer>
+        Created by Dinujaya S.{" "}
+        <a
+          href="https://github.com/Dinujaya-Sandaruwan/short.dinujaya.com"
+          target="_blank"
+        >
+          Give a star on <FaGithub />
+        </a>
+      </footer>
     </main>
   );
 }
