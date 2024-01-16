@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  web:
+    depends_on: 
+     - api
+    build: ./
+    ports: 
+     - "5173:5173"
+    develop:
+      watch:
+        - path: ./package*.json
+          action: rebuild
+        - path: ./pnpm-lock.yaml
+          action: rebuild
+        - path: ./src
+          action: rebuild
+        - path: ./
+          action: sync
+
+  api:
+    depends_on: 
+      - db
+    build: ./server
+    ports: 
+      - "5005:5005"
+    develop:
+      watch:
+        - path: ./server/package*.json
+          action: rebuild
+        - path: ./server/pnpm-lock.yaml
+          action: rebuild
+        - path: ./server
+          action: sync  
+  
+
+
+  db: 
+    image: mongo:latest
+    ports:
+      - "27017:27017" 
+    volumes:
+      - react-app:/data/db 
+
+
+volumes:
+  react-app:

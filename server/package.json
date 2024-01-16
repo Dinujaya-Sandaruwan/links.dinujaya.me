@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Dinujaya-Sandaruwan/short.dinujaya.com#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "v4.17.1",
     "mongoose": "v5.9.1",
     "shortid": "v2.2.15",
